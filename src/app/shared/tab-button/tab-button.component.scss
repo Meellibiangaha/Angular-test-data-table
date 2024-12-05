@@ -1,0 +1,18 @@
+.tab {
+  width: 100%;
+  padding: 8px 60px;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 3px;
+  background-color: #333333;
+  transition: all 0.2s;
+
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+
+  cursor: pointer;
+  &:hover:not(:disabled) {
+    background-color: #4d4d4d;
+  }
+}

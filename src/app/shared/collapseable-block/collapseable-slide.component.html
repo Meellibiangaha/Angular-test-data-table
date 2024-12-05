@@ -1,0 +1,16 @@
+<div class="top-wrapper" (click)="toggle()">
+  <div class="detail">
+    <div class="detail__title">
+      <span class="detail__title_text">{{ title() }}</span>
+    </div>
+  </div>
+</div>
+<div
+  class="slide-content"
+  [class.opened]="opened()"
+  [class.process]="slideProccess()"
+  [@slideToggle]="state()"
+  (@slideToggle.done)="updateOpenedState()"
+  (@slideToggle.start)="updateProcessState()">
+  <ng-content></ng-content>
+</div>
