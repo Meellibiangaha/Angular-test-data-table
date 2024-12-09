@@ -1,0 +1,13 @@
+:host {
+  .mat-mdc-form-field-flex{
+    height: 38px;
+  }
+  .mdc-text-field--outlined .mat-mdc-form-field-infix,
+  .mdc-text-field--no-label .mat-mdc-form-field-infix {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label{
+    height: 38px;
+  }
+}

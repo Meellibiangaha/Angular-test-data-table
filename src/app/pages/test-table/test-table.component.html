@@ -1,5 +1,35 @@
 <div class="content">
   <div class="title">
+    <app-tab-button class="back-btn" [btnText]="'На главную'" [routerLink]="['/']" />
     <div class="title__text">Title text</div>
   </div>
+  <div class="table-filter">
+    <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.sortName" />
+    <app-datapicker [formControl]="filter.controls.range" />
+  </div>
+  <div class="table-wrapper" appScrollableContainer>
+    <table #table class="table table--sticky">
+      <thead>
+        <tr>
+          @for (column of displayedColumns; track column) {
+          <th>{{ column }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items(); track item) {
+        <tr [class.agent-details]="item.agent_Details" app-test-table-item="" [item]="item"></tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
+<mat-paginator
+  (page)="handlePageEvent($event)"
+  [length]="paginator().totalPages"
+  [pageSize]="paginator().pageSize"
+  [showFirstLastButtons]="true"
+  [pageSizeOptions]="paginator().pageSizeOptions"
+  [pageIndex]="paginator().currentPage"
+  aria-label="Select page">
+</mat-paginator>

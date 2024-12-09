@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SlideToggleAnimation } from '../../core/animations/slide-toggle.animation';
+import { SlideToggleAnimation } from '../../../core/animations/slide-toggle.animation';
 
 @Component({
   selector: 'app-collapseable-slide',

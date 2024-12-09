@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
-import { TabButtonComponent } from '../../shared/tab-button/tab-button.component';
-import { CollapseableSlideComponent } from '../../shared/collapseable-block/collapseable-slide.component';
+import { TabButtonComponent } from '../../shared/components/tab-button/tab-button.component';
+import { CollapseableSlideComponent } from '../../shared/components/collapseable-block/collapseable-slide.component';
 
 const routes: Routes = [
   {
