@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DateRange } from '../../../core/models/date-range';
 import { debounceTime, Subject } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
+import { formatDateToDMY } from '../../../core/helpers/date-format';
 
 @Component({
   selector: 'app-datapicker',
   standalone: true,
-  imports: [MatFormFieldModule, MatDatepickerModule],
+  imports: [MatFormFieldModule, MatDatepickerModule, MatInputModule, MatNativeDateModule],
   templateUrl: './datapicker.component.html',
   styleUrl: './datapicker.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,11 +24,16 @@ import { debounceTime, Subject } from 'rxjs';
   ],
 })
 export class DatapickerComponent implements ControlValueAccessor, OnInit {
+  @Input()
+  label: string = 'Выберите дату';
+
   /** Чтобы реализовать задержку перед onChange */
   private inputSubject = new Subject<string>();
 
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
+
+  /** Методы ControlValueAccessor */
   writeValue(value: string): void {}
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
@@ -35,9 +41,10 @@ export class DatapickerComponent implements ControlValueAccessor, OnInit {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  changeHandler(dateInput: MatDatepickerInputEvent<any, any>): void {
-    const dateISO = new Date(dateInput.value).toISOString();
+  /** end */
 
+  changeHandler(dateInput: MatDatepickerInputEvent<any, any>): void {
+    const dateISO = dateInput.value ? formatDateToDMY(new Date(dateInput.value)) : null;
     this.inputSubject.next(dateISO);
   }
   ngOnInit(): void {

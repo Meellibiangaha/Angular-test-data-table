@@ -10,7 +10,7 @@ import { PaginatorModel } from '../../core/models/paginator.model';
 import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, combineLatest, debounceTime, map, skip, startWith, switchMap, tap } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DateRange } from '../../core/models/date-range';
+import { DateRange, DateRangeForm } from '../../core/models/date-range';
 import { OrderByEnum } from '../../core/enums/order-by.enum';
 import { FwbTableForm } from './form/fwbReports-table.form';
 import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -38,7 +38,10 @@ export class TestTableComponent implements OnInit {
 
   filter: FormGroup<FwbTableForm> = new FormGroup({
     sortName: new FormControl(''),
-    range: new FormControl<DateRange>(null),
+    range: new FormGroup<DateRangeForm>({
+      from: new FormControl<string>(null),
+      to: new FormControl<string>(''),
+    }),
     sortBy: new FormControl<keyof FwbDetails>(null),
     sortDesc: new FormControl<OrderByEnum>(null),
   });
@@ -64,6 +67,12 @@ export class TestTableComponent implements OnInit {
     'Weight_Actual',
     'Weight_Identifier',
   ];
+
+  isExpanded: { [key: string]: boolean } = {};
+
+  toggleExpand(itemId: number) {
+    this.isExpanded[itemId] = !this.isExpanded[itemId];
+  }
 
   handlePageEvent(event: PageEvent): void {
     console.log(event);

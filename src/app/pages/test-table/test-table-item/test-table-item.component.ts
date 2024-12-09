@@ -8,6 +8,6 @@ import { FwbReportModel } from '../models/fwbReports.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestTableItemComponent {
-  @Input({required: true})
+  @Input({ required: true })
   item: FwbReportModel;
 }

@@ -1,0 +1,21 @@
+<td colspan="7">
+  <div
+    [@slideToggle]="state()"
+    (@slideToggle.done)="updateOpenedState()"
+    (@slideToggle.start)="updateProcessState()"
+    [class.opened]="isToggle()"
+    [class.closed]="!isToggle()"
+    [class.process]="slideProccess()"
+    class="slide-content expanded-details">
+    @for (title of destructureObj(item); track title) {
+    <div class="details">
+      <h1 class="details-title" *ngIf="title.value">{{ title.key }}</h1>
+      @for (detail of destructureObj(title.value); track detail) {
+      <div>
+        <span class="details-option">{{ detail.key }}:</span> {{ detail.value }}
+      </div>
+      }
+    </div>
+    }
+  </div>
+</td>

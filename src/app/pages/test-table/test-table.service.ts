@@ -22,8 +22,8 @@ export class TestTableService {
     return {
       pageNumber: paginator?.currentPage ?? PAGINATION_CONFIG.DEFAULT_VALUE.currentPage,
       pageSize: paginator?.pageSize ?? PAGINATION_CONFIG.DEFAULT_VALUE.pageSize,
-      startDate: filter?.range?.from,
-      endDate: filter?.range?.to,
+      from: filter?.range?.from,
+      until: filter?.range?.to,
       sortName: filter?.sortName,
       sortBy: filter?.sortBy,
       // sortOrder: filter?.sortDesc,

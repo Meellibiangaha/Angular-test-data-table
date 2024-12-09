@@ -126,12 +126,17 @@ body {
   }
 
   &::-webkit-scrollbar-track {
+    width: 5px;
     background: #f8f8f8;
   }
 
   &::-webkit-scrollbar-thumb {
+    width: 5px;
     background-color: #e4e4e4;
     border-radius: 16px;
     border: 1px solid #e4e4e4;
+  }
+  &::-webkit-scrollbar:vertical {
+    width: 5px;
   }
 }

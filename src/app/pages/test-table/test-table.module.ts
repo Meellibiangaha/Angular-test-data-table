@@ -12,6 +12,7 @@ import { InputSearchComponent } from '../../shared/components/input-search/input
 import { DatapickerComponent } from '../../shared/components/datapicker/datapicker.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TestTableItemExpandedComponent } from './test-table-item-expanded/test-table-item-expanded.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TestTableComponent, TestTableItemComponent],
+  declarations: [TestTableComponent, TestTableItemComponent, TestTableItemExpandedComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

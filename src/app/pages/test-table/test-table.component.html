@@ -5,7 +5,8 @@
   </div>
   <div class="table-filter">
     <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.sortName" />
-    <app-datapicker [formControl]="filter.controls.range" />
+    <app-datapicker [formControl]="filter.controls.range.controls.from" />
+    <app-datapicker [formControl]="filter.controls.range.controls.to" />
   </div>
   <div class="table-wrapper" appScrollableContainer>
     <table #table class="table table--sticky">
@@ -18,7 +19,16 @@
       </thead>
       <tbody>
         @for (item of items(); track item) {
-        <tr [class.agent-details]="item.agent_Details" app-test-table-item="" [item]="item"></tr>
+        <tr
+          [class.agent-details]="item.agent_Details"
+          app-test-table-item=""
+          [item]="item"
+          (click)="toggleExpand(item.fWB_Details.AWBID)"></tr>
+        <tr
+          app-test-table-item-expanded=""
+          [item]="item"
+          [isExpanded]="isExpanded[item.fWB_Details.AWBID]"
+          [class.table-item-expanded]="!isExpanded[item.fWB_Details.AWBID]"></tr>
         }
       </tbody>
     </table>

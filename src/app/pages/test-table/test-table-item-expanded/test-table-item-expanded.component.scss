@@ -1,0 +1,36 @@
+:host {
+  td {
+    padding: 0;
+  }
+}
+.slide-content {
+  overflow: hidden;
+
+  &.opened {
+    overflow: visible;
+    padding: 10px 16px;
+  }
+  &.process {
+    padding: 10px 16px;
+    overflow: hidden;
+  }
+}
+
+.expanded-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  &-title {
+    margin: 0;
+    padding-bottom: 4px;
+    font-size: 18px;
+  }
+  &-option {
+    font-weight: 500;
+  }
+}
