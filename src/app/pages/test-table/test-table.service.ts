@@ -5,6 +5,7 @@ import { FwbReportsRequest } from './models/fwbReports-request';
 import { PaginatorModel } from '../../core/models/paginator.model';
 import { PAGINATION_CONFIG } from '../../core/constants/pagination-config';
 import { FwbTableFormModel } from './form/fwbReports-table.form';
+import { OrderByEnum } from '../../core/enums/order-by.enum';
 @Injectable({
   providedIn: 'any',
 })
@@ -18,15 +19,19 @@ export class TestTableService {
       })
     );
   }
-  mapFilterToRequest(filter: Partial<FwbTableFormModel>, paginator: PaginatorModel): FwbReportsRequest {
+  mapFilterToRequest(
+    filter: Partial<FwbTableFormModel>,
+    sortBy: { column: string; orderBy: OrderByEnum },
+    paginator: PaginatorModel
+  ): FwbReportsRequest {
     return {
       pageNumber: paginator?.currentPage ?? PAGINATION_CONFIG.DEFAULT_VALUE.currentPage,
       pageSize: paginator?.pageSize ?? PAGINATION_CONFIG.DEFAULT_VALUE.pageSize,
       from: filter?.range?.from,
       until: filter?.range?.to,
-      sortName: filter?.sortName,
-      sortBy: filter?.sortBy,
-      // sortOrder: filter?.sortDesc,
+      searchTerm: filter?.searchTerm,
+      sortName: sortBy?.orderBy ? sortBy?.column : null,
+      sortBy: sortBy?.orderBy === OrderByEnum.Asc ? 'asc' : sortBy?.orderBy === OrderByEnum.Desc ? 'desc' : null,
     };
   }
 }

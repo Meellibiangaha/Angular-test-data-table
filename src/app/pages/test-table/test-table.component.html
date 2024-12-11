@@ -4,16 +4,16 @@
     <div class="title__text">Title text</div>
   </div>
   <div class="table-filter">
-    <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.sortName" />
+    <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.searchTerm" />
     <app-datapicker [formControl]="filter.controls.range.controls.from" />
     <app-datapicker [formControl]="filter.controls.range.controls.to" />
   </div>
   <div class="table-wrapper" appScrollableContainer>
-    <table #table class="table table--sticky">
+    <table #table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
       <thead>
         <tr>
           @for (column of displayedColumns; track column) {
-          <th>{{ column }}</th>
+          <th app-test-table-title="" [column]="column" (orderChange)="orderChange($event)"></th>
           }
         </tr>
       </thead>
@@ -33,13 +33,13 @@
       </tbody>
     </table>
   </div>
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="paginator().totalPages"
+    [pageSize]="paginator().pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="paginator().pageSizeOptions"
+    [pageIndex]="paginator().currentPage"
+    aria-label="Select page">
+  </mat-paginator>
 </div>
-<mat-paginator
-  (page)="handlePageEvent($event)"
-  [length]="paginator().totalPages"
-  [pageSize]="paginator().pageSize"
-  [showFirstLastButtons]="true"
-  [pageSizeOptions]="paginator().pageSizeOptions"
-  [pageIndex]="paginator().currentPage"
-  aria-label="Select page">
-</mat-paginator>

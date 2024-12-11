@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, Input, signal } from '@angular/core';
-import { FwbReportModel } from '../models/fwbReports.model';
-import { SlideToggleAnimation } from '../../../core/animations/slide-toggle.animation';
+import { FwbReportModel } from '../../models/fwbReports.model';
+import { SlideToggleAnimation } from '../../../../core/animations/slide-toggle.animation';
 
 @Component({
   selector: '[app-test-table-item-expanded]',

@@ -5,14 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { testTableResolver } from './test-table.resolver';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TabButtonComponent } from '../../shared/components/tab-button/tab-button.component';
-import { TestTableItemComponent } from './test-table-item/test-table-item.component';
+import { TestTableItemComponent } from './components/test-table-item/test-table-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollableContainerDirective } from '../../shared/directives/scrollable-container.directive';
 import { InputSearchComponent } from '../../shared/components/input-search/input-search.component';
 import { DatapickerComponent } from '../../shared/components/datapicker/datapicker.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TestTableItemExpandedComponent } from './test-table-item-expanded/test-table-item-expanded.component';
+import { TestTableItemExpandedComponent } from './components/test-table-item-expanded/test-table-item-expanded.component';
+import { TestTableTitleComponent } from './components/test-table-title/test-table-title.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TestTableComponent, TestTableItemComponent, TestTableItemExpandedComponent],
+  declarations: [TestTableComponent, TestTableItemComponent, TestTableItemExpandedComponent, TestTableTitleComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -30,18 +30,21 @@ export class TestTableComponent implements OnInit {
     private storageService: AppStorageService
   ) {}
 
+  /** Пагинация */
   readonly paginator = signal<PaginatorModel>({
     ...PAGINATION_CONFIG.DEFAULT_VALUE,
     pageSizeOptions: PAGINATION_CONFIG.PAGE_SIZE_VALUES,
   });
   readonly paginatorSubject = new BehaviorSubject<PaginatorModel>(PAGINATION_CONFIG.DEFAULT_VALUE);
 
+  /** Фильтр */
   filter: FormGroup<FwbTableForm> = new FormGroup({
-    sortName: new FormControl(''),
     range: new FormGroup<DateRangeForm>({
       from: new FormControl<string>(null),
-      to: new FormControl<string>(''),
+      to: new FormControl<string>(null),
     }),
+    searchTerm: new FormControl<string>(null),
+    sortName: new FormControl<string>(null),
     sortBy: new FormControl<keyof FwbDetails>(null),
     sortDesc: new FormControl<OrderByEnum>(null),
   });
@@ -56,6 +59,9 @@ export class TestTableComponent implements OnInit {
     )
   );
 
+  readonly orderBySubject = new BehaviorSubject<{ column: string; orderBy: OrderByEnum }>(null);
+
+  /** Элементы таблицы, лоадеры и вспомогательные сущности */
   readonly loading = signal<boolean>(false);
   readonly items = signal<FwbReportModel[]>(null);
   readonly displayedColumns: string[] = [
@@ -67,15 +73,19 @@ export class TestTableComponent implements OnInit {
     'Weight_Actual',
     'Weight_Identifier',
   ];
+  readonly isExpanded: { [key: string]: boolean } = {};
 
-  isExpanded: { [key: string]: boolean } = {};
+  /** Логика компонента */
 
   toggleExpand(itemId: number) {
     this.isExpanded[itemId] = !this.isExpanded[itemId];
   }
 
+  orderChange(sortDetails: { column: string; orderBy: OrderByEnum }): void {
+    this.orderBySubject.next(sortDetails);
+  }
+
   handlePageEvent(event: PageEvent): void {
-    console.log(event);
     this.paginatorSubject.next({
       pageSize: event.pageSize,
       currentPage: event.pageIndex,
@@ -88,17 +98,19 @@ export class TestTableComponent implements OnInit {
     this.paginator.set({
       ...this.paginator(),
       totalPages: response.totalRecords,
+      currentPage: this.paginatorSubject.value.currentPage,
+      pageSize: this.paginatorSubject.value.pageSize,
     });
   }
   ngOnInit(): void {
     this.activatedRoute.data.pipe(untilDestroyed(this)).subscribe(({ testTable }) => this.setUp(testTable));
-    combineLatest([this.filterChanges$, this.paginatorSubject])
+    combineLatest([this.filterChanges$, this.orderBySubject, this.paginatorSubject])
       .pipe(
         untilDestroyed(this),
         debounceTime(150),
         skip(1),
         tap(() => this.loading.set(true)),
-        map(([filter, paginator]) => this.testTableService.mapFilterToRequest(filter, paginator)),
+        map(([filter, sortBy, paginator]) => this.testTableService.mapFilterToRequest(filter, sortBy, paginator)),
         switchMap((request) => this.testTableService.loadFWBReports(request)),
         tap(() => this.loading.set(false)),
         tap((response) => this.setUp(response))

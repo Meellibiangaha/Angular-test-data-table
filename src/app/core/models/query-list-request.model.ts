@@ -1,3 +1,5 @@
+import { OrderByEnum } from '../enums/order-by.enum';
+
 export type PagedListQueryBase = {
   /** Номер страницы */
   pageNumber?: number;
@@ -11,5 +13,4 @@ export type PagedListQuery = PagedListQueryBase & {
 
 export type SortablePagedListQuery = PagedListQuery & {
   sortBy?: string;
-  sortOrder?: boolean;
 };

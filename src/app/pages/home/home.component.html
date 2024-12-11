@@ -7,7 +7,21 @@
   </div>
   <div class="collapseable-slides-wrapper">
     <app-collapseable-slide [titleText]="'test'">test1 </app-collapseable-slide>
-    <app-collapseable-slide [titleText]="'test'">test2 </app-collapseable-slide>
-    <app-collapseable-slide [titleText]="'test'">test3 </app-collapseable-slide>
+    <app-collapseable-slide [titleText]="'Интерактивность строки'">
+      <div>
+        <span>Цвет фона строки зелёный, если у неё есть agency_detail</span>
+        <span>При клике на строку таблицы она раскрывается и показывается дополнительная информация</span>
+      </div>
+    </app-collapseable-slide>
+    <app-collapseable-slide [titleText]="'Сортировка'">
+      <div>
+        <span>Сортировка сделана по:</span>
+        <ul>
+          <li>Инпуту поиска</li>
+          <li>Период дат (start - end)</li>
+          <li>По столбцам (при 3-м клике по иконке сбрасывается сортировка)</li>
+        </ul>
+      </div>
+    </app-collapseable-slide>
   </div>
 </div>
