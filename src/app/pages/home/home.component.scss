@@ -2,6 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  ul {
+    padding: 0 0 0 20px;
+  }
+  ::ng-deep {
+    app-collapseable-slide {
+      .detail__title_text {
+        color: #ffffff;
+      }
+    }
+  }
 }
 .page-content {
   width: 100%;
@@ -12,18 +22,31 @@
   align-items: center;
   gap: 10px;
 
-  background-color: black;
+  background-color: #000000;
   border-radius: 16px;
-  color: white;
+  color: #ffffff;
+}
+.summary{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  &__text{
+    color: #808080;
+  }
 }
 .buttons {
   &-wrapper {
+    width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 12px;
   }
 }
+
+.route-btn {
+  flex-basis: 50%;
+}
+
 .avatar {
   display: inline-block;
   background-position: center;
@@ -35,9 +58,16 @@
   border-radius: 100px;
 }
 
-.collapseable-slides-wrapper{
+.collapseable-slides-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.slide-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
 }

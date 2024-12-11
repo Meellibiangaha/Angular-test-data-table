@@ -1,20 +1,25 @@
 <div class="page-content">
   <div class="avatar"></div>
   <div class="title">Тестовое задание</div>
-  <div class="summary">Angular</div>
+  <div class="summary">Angular <span class="summary__text">(блоки ниже раскрываются при нажатии)</span></div>
   <div class="buttons-wrapper">
-    <app-tab-button [btnText]="'Таблица'" [routerLink]="['fwb-table']" />
+    <app-tab-button class="route-btn" [btnText]="'Таблица'" [routerLink]="['fwb-table']" />
   </div>
   <div class="collapseable-slides-wrapper">
-    <app-collapseable-slide [titleText]="'test'">test1 </app-collapseable-slide>
+    <app-collapseable-slide [titleText]="'Drag&Drop'">
+      <div class="slide-detail">
+        <span>При переносе строки в правую часть экрана она дублируется</span>
+        <span>Имеется функция удаления дублированной строки</span>
+      </div>
+    </app-collapseable-slide>
     <app-collapseable-slide [titleText]="'Интерактивность строки'">
-      <div>
+      <div class="slide-detail">
         <span>Цвет фона строки зелёный, если у неё есть agency_detail</span>
         <span>При клике на строку таблицы она раскрывается и показывается дополнительная информация</span>
       </div>
     </app-collapseable-slide>
     <app-collapseable-slide [titleText]="'Сортировка'">
-      <div>
+      <div class="slide-detail">
         <span>Сортировка сделана по:</span>
         <ul>
           <li>Инпуту поиска</li>

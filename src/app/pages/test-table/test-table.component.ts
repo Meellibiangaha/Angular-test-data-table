@@ -99,7 +99,14 @@ export class TestTableComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      /** Проверка, чтобы не было одинаковых дублированных карточек */
+      const item = event.previousContainer.data[event.previousIndex];
+      const itemCopy = { ...item };
+      const exists = this.itemsCards().some((card) => card.fWB_Details.AWBID === itemCopy.fWB_Details.AWBID);
+
+      if (!exists) {
+        this.itemsCards.update((cards) => [...cards, itemCopy]);
+      }
     }
   }
 
@@ -117,6 +124,7 @@ export class TestTableComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    /** Получаем данные с резолвера и подписываемся на изменения фильтра, пагинации и сортировки */
     this.activatedRoute.data.pipe(untilDestroyed(this)).subscribe(({ testTable }) => this.setUp(testTable));
     combineLatest([this.filterChanges$, this.orderBySubject, this.paginatorSubject])
       .pipe(

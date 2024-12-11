@@ -1,8 +1,7 @@
-<div class="content">
+<div cdkDropListGroup class="content">
   <div>
     <div class="title">
       <app-tab-button class="back-btn" [btnText]="'На главную'" [routerLink]="['/']" />
-      <div class="title__text">Title text</div>
     </div>
     <div class="table-filter">
       <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.searchTerm" />
@@ -10,7 +9,7 @@
       <app-datapicker [formControl]="filter.controls.range.controls.to" />
     </div>
     <div class="table-wrapper scrollable">
-      <table #table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
+      <table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
         <thead>
           <tr>
             @for (column of displayedColumns; track column) {
@@ -18,12 +17,7 @@
             }
           </tr>
         </thead>
-        <tbody
-          #itemsList="cdkDropList"
-          cdkDropList
-          [cdkDropListData]="items()"
-          [cdkDropListConnectedTo]="[cardsList]"
-          (cdkDropListDropped)="drop($event)">
+        <tbody cdkDropList [cdkDropListData]="items()" (cdkDropListDropped)="drop($event)">
           @for (item of items(); track item) {
           <tr
             cdkDrag
@@ -55,13 +49,7 @@
     </mat-paginator>
   </div>
 
-  <div
-    class="card-container"
-    cdkDropList
-    #cardsList="cdkDropList"
-    [cdkDropListData]="itemsCards()"
-    [cdkDropListConnectedTo]="[itemsList]"
-    (cdkDropListDropped)="drop($event)">
+  <div class="card-container" cdkDropList [cdkDropListData]="itemsCards()" (cdkDropListDropped)="drop($event)">
     <div class="card-wrapper">
       @for (itemCard of itemsCards(); track itemCard) {
       <div class="card-block">
