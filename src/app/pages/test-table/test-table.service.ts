@@ -31,7 +31,7 @@ export class TestTableService {
       until: filter?.range?.to,
       searchTerm: filter?.searchTerm,
       sortName: sortBy?.orderBy ? sortBy?.column : null,
-      sortBy: sortBy?.orderBy === OrderByEnum.Asc ? 'asc' : sortBy?.orderBy === OrderByEnum.Desc ? 'desc' : null,
+      sortOrder: sortBy?.orderBy === OrderByEnum.Asc ? 'asc' : sortBy?.orderBy === OrderByEnum.Desc ? 'desc' : null,
     };
   }
 }

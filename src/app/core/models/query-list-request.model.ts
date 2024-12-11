@@ -12,5 +12,5 @@ export type PagedListQuery = PagedListQueryBase & {
 };
 
 export type SortablePagedListQuery = PagedListQuery & {
-  sortBy?: string;
+  sortOrder?: string;
 };

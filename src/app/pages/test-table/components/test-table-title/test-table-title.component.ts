@@ -31,7 +31,6 @@ export class TestTableTitleComponent {
         this.order.set(OrderByEnum.Asc);
         break;
     }
-    console.log(this.order())
     this.orderChange.emit({ column: this.column, orderBy: this.order() });
   }
 }

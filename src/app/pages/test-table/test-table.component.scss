@@ -3,9 +3,21 @@
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 20px 100px;
+  padding: 20px 30px;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  tr {
+    cursor: pointer;
+  }
 }
 .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 28px;
 }
 .title {
   padding-bottom: 30px;
@@ -29,40 +41,31 @@
     flex-direction: row;
     gap: 16px;
   }
-  &-sort {
-    user-select: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-    &:hover {
-      .table-sort-icon {
-        opacity: 1;
-      }
-    }
-    &-icon {
-      opacity: 0;
-      cursor: pointer;
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        // background-repeat: no-repeat;
-        // background-size: contain;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20px' viewBox='0 -960 960 960' width='20px' fill='%23999999'%3E%3Cpath d='M324-432v-294L219-621l-51-51 192-192 192 192-51 51-105-105v294h-72ZM600-96 408-288l51-51 105 105v-294h72v294l105-105 51 51L600-96Z'/%3E%3C/svg%3E");
-      }
-      &:hover {
-        &::before {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='20px' viewBox='0 -960 960 960' width='20px' fill='%23000000'%3E%3Cpath d='M324-432v-294L219-621l-51-51 192-192 192 192-51 51-105-105v294h-72ZM600-96 408-288l51-51 105 105v-294h72v294l105-105 51 51L600-96Z'/%3E%3C/svg%3E");
-        }
-      }
-    }
-  }
 }
 .agent-details {
   background-color: rgb(231, 255, 231);
 }
 .table-item-expanded {
   border-bottom: none;
+}
+
+.card {
+  flex-basis: 33%;
+  &-container {
+    width: 650px;
+    max-width: 650px;
+    height: 550px;
+    padding: 12px;
+    background-color: transparent;
+    border: 3px solid #f6f6f6;
+    border-radius: 16px;
+    overflow-y: scroll;
+  }
+}
+
+.collapseable-slides-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }

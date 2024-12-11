@@ -14,6 +14,7 @@ import { DateRange, DateRangeForm } from '../../core/models/date-range';
 import { OrderByEnum } from '../../core/enums/order-by.enum';
 import { FwbTableForm } from './form/fwbReports-table.form';
 import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @UntilDestroy()
 @Component({
@@ -64,6 +65,8 @@ export class TestTableComponent implements OnInit {
   /** Элементы таблицы, лоадеры и вспомогательные сущности */
   readonly loading = signal<boolean>(false);
   readonly items = signal<FwbReportModel[]>(null);
+  readonly itemsCards = signal<FwbReportModel[]>([]);
+
   readonly displayedColumns: string[] = [
     'AWBID',
     'AWB_Prefix',
@@ -76,7 +79,6 @@ export class TestTableComponent implements OnInit {
   readonly isExpanded: { [key: string]: boolean } = {};
 
   /** Логика компонента */
-
   toggleExpand(itemId: number) {
     this.isExpanded[itemId] = !this.isExpanded[itemId];
   }
@@ -91,6 +93,14 @@ export class TestTableComponent implements OnInit {
       currentPage: event.pageIndex,
       totalPages: event.length,
     });
+  }
+
+  drop(event: CdkDragDrop<FwbReportModel[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
   }
 
   setUp(response: FwbReportsPageResult): void {

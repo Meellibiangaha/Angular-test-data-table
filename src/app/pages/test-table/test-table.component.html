@@ -1,45 +1,70 @@
 <div class="content">
-  <div class="title">
-    <app-tab-button class="back-btn" [btnText]="'На главную'" [routerLink]="['/']" />
-    <div class="title__text">Title text</div>
-  </div>
-  <div class="table-filter">
-    <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.searchTerm" />
-    <app-datapicker [formControl]="filter.controls.range.controls.from" />
-    <app-datapicker [formControl]="filter.controls.range.controls.to" />
-  </div>
-  <div class="table-wrapper" appScrollableContainer>
-    <table #table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
-      <thead>
-        <tr>
-          @for (column of displayedColumns; track column) {
-          <th app-test-table-title="" [column]="column" (orderChange)="orderChange($event)"></th>
+  <div>
+    <div class="title">
+      <app-tab-button class="back-btn" [btnText]="'На главную'" [routerLink]="['/']" />
+      <div class="title__text">Title text</div>
+    </div>
+    <div class="table-filter">
+      <app-input-search [placeholder]="'Поиск'" [formControl]="filter.controls.searchTerm" />
+      <app-datapicker [formControl]="filter.controls.range.controls.from" />
+      <app-datapicker [formControl]="filter.controls.range.controls.to" />
+    </div>
+    <div class="table-wrapper" appScrollableContainer>
+      <table #table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
+        <thead>
+          <tr>
+            @for (column of displayedColumns; track column) {
+            <th app-test-table-title="" [column]="column" (orderChange)="orderChange($event)"></th>
+            }
+          </tr>
+        </thead>
+        <tbody
+          #itemsList="cdkDropList"
+          cdkDropList
+          [cdkDropListData]="items()"
+          [cdkDropListConnectedTo]="[cardsList]"
+          (cdkDropListDropped)="drop($event)">
+          @for (item of items(); track item) {
+          <tr
+            cdkDrag
+            [cdkDragData]="item"
+            [class.agent-details]="item.agent_Details"
+            app-test-table-item=""
+            [item]="item"
+            (click)="toggleExpand(item.fWB_Details.AWBID)"></tr>
+          <tr
+            app-test-table-item-expanded=""
+            [item]="item"
+            [isExpanded]="isExpanded[item.fWB_Details.AWBID]"
+            [class.table-item-expanded]="!isExpanded[item.fWB_Details.AWBID]"></tr>
           }
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of items(); track item) {
-        <tr
-          [class.agent-details]="item.agent_Details"
-          app-test-table-item=""
-          [item]="item"
-          (click)="toggleExpand(item.fWB_Details.AWBID)"></tr>
-        <tr
-          app-test-table-item-expanded=""
-          [item]="item"
-          [isExpanded]="isExpanded[item.fWB_Details.AWBID]"
-          [class.table-item-expanded]="!isExpanded[item.fWB_Details.AWBID]"></tr>
-        }
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+    <mat-paginator
+      (page)="handlePageEvent($event)"
+      [length]="paginator().totalPages"
+      [pageSize]="paginator().pageSize"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="paginator().pageSizeOptions"
+      [pageIndex]="paginator().currentPage"
+      aria-label="Select page">
+    </mat-paginator>
   </div>
-  <mat-paginator
-    (page)="handlePageEvent($event)"
-    [length]="paginator().totalPages"
-    [pageSize]="paginator().pageSize"
-    [showFirstLastButtons]="true"
-    [pageSizeOptions]="paginator().pageSizeOptions"
-    [pageIndex]="paginator().currentPage"
-    aria-label="Select page">
-  </mat-paginator>
+
+  <div
+    class="card-container"
+    cdkDropList
+    #cardsList="cdkDropList"
+    [cdkDropListData]="itemsCards()"
+    [cdkDropListConnectedTo]="[itemsList]"
+    (cdkDropListDropped)="drop($event)">
+    <div class="collapseable-slides-wrapper">
+      @for (itemCard of itemsCards(); track itemCard) {
+      <app-collapseable-slide class="card" cdkDrag [titleText]="'AWBID: ' + itemCard.fWB_Details.AWBID">
+
+      </app-collapseable-slide>
+      }
+    </div>
+  </div>
 </div>

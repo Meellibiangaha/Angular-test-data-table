@@ -14,6 +14,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TestTableItemExpandedComponent } from './components/test-table-item-expanded/test-table-item-expanded.component';
 import { TestTableTitleComponent } from './components/test-table-title/test-table-title.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CollapseableSlideComponent } from '../../shared/components/collapseable-block/collapseable-slide.component';
+import { CardItemDetailComponent } from './components/card-item-detail/card-item-detail.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TestTableComponent, TestTableItemComponent, TestTableItemExpandedComponent, TestTableTitleComponent],
+  declarations: [
+    TestTableComponent,
+    TestTableItemComponent,
+    TestTableItemExpandedComponent,
+    TestTableTitleComponent,
+    CardItemDetailComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -35,9 +44,11 @@ const routes: Routes = [
     TabButtonComponent,
     ScrollableContainerDirective,
     InputSearchComponent,
+    CollapseableSlideComponent,
     DatapickerComponent,
     MatFormFieldModule,
     MatDatepickerModule,
+    DragDropModule,
   ],
 })
 export class TestTableModule {}
