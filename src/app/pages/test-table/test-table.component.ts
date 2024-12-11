@@ -103,6 +103,10 @@ export class TestTableComponent implements OnInit {
     }
   }
 
+  removeCard(cardId: number): void {
+    this.itemsCards.update((cards) => cards.filter((card) => card.fWB_Details.AWBID !== cardId));
+  }
+
   setUp(response: FwbReportsPageResult): void {
     this.items.set(response.fwb_data);
     this.paginator.set({
@@ -117,7 +121,7 @@ export class TestTableComponent implements OnInit {
     combineLatest([this.filterChanges$, this.orderBySubject, this.paginatorSubject])
       .pipe(
         untilDestroyed(this),
-        debounceTime(150),
+        debounceTime(300),
         skip(1),
         tap(() => this.loading.set(true)),
         map(([filter, sortBy, paginator]) => this.testTableService.mapFilterToRequest(filter, sortBy, paginator)),

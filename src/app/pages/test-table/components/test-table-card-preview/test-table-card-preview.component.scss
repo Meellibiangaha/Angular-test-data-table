@@ -1,0 +1,13 @@
+:host {
+  max-width: 300px;
+  width: 300px;
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+.preview {
+  &__text {
+    font-size: 18px;
+  }
+}

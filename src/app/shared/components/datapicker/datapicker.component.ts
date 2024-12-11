@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { debounceTime, Subject } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
 import { formatDateToDMY } from '../../../core/helpers/date-format';
 
@@ -23,12 +22,9 @@ import { formatDateToDMY } from '../../../core/helpers/date-format';
     provideNativeDateAdapter(),
   ],
 })
-export class DatapickerComponent implements ControlValueAccessor, OnInit {
+export class DatapickerComponent implements ControlValueAccessor {
   @Input()
   label: string = 'Выберите дату';
-
-  /** Чтобы реализовать задержку перед onChange */
-  private inputSubject = new Subject<string>();
 
   onChange: (value: string) => void = () => null;
   onTouched: () => void = () => null;
@@ -45,11 +41,6 @@ export class DatapickerComponent implements ControlValueAccessor, OnInit {
 
   changeHandler(dateInput: MatDatepickerInputEvent<any, any>): void {
     const dateISO = dateInput.value ? formatDateToDMY(new Date(dateInput.value)) : null;
-    this.inputSubject.next(dateISO);
-  }
-  ngOnInit(): void {
-    this.inputSubject.pipe(debounceTime(400)).subscribe((value) => {
-      this.onChange(value);
-    });
+    this.onChange(dateISO);
   }
 }

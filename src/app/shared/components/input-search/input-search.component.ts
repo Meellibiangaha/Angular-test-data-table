@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-input-search',
@@ -18,15 +17,12 @@ import { debounceTime, Subject } from 'rxjs';
     },
   ],
 })
-export class InputSearchComponent implements ControlValueAccessor, OnInit {
+export class InputSearchComponent implements ControlValueAccessor {
   @Input()
   placeholder: string = null;
 
   @ViewChild('input', { static: true })
   input: ElementRef<HTMLInputElement>;
-
-  /** Чтобы реализовать задержку перед onChange */
-  private inputSubject = new Subject<string>();
 
   /** Методы ControlValueAccessor */
   onChange: (value: string) => void = () => null;
@@ -45,12 +41,6 @@ export class InputSearchComponent implements ControlValueAccessor, OnInit {
   /** end */
 
   changeHandler(value: string): void {
-    this.inputSubject.next(value);
-  }
-
-  ngOnInit(): void {
-    this.inputSubject.pipe(debounceTime(400)).subscribe((value) => {
-      this.onChange(value);
-    });
+    this.onChange(value);
   }
 }

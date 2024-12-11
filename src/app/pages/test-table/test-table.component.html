@@ -9,7 +9,7 @@
       <app-datapicker [formControl]="filter.controls.range.controls.from" />
       <app-datapicker [formControl]="filter.controls.range.controls.to" />
     </div>
-    <div class="table-wrapper" appScrollableContainer>
+    <div class="table-wrapper scrollable">
       <table #table class="table table--sticky" [ngClass]="{ 'table--loading': loading() }">
         <thead>
           <tr>
@@ -31,7 +31,10 @@
             [class.agent-details]="item.agent_Details"
             app-test-table-item=""
             [item]="item"
-            (click)="toggleExpand(item.fWB_Details.AWBID)"></tr>
+            (click)="toggleExpand(item.fWB_Details.AWBID)">
+            <app-test-table-card-preview *cdkDragPreview [item]="item" />
+          </tr>
+
           <tr
             app-test-table-item-expanded=""
             [item]="item"
@@ -59,11 +62,16 @@
     [cdkDropListData]="itemsCards()"
     [cdkDropListConnectedTo]="[itemsList]"
     (cdkDropListDropped)="drop($event)">
-    <div class="collapseable-slides-wrapper">
+    <div class="card-wrapper">
       @for (itemCard of itemsCards(); track itemCard) {
-      <app-collapseable-slide class="card" cdkDrag [titleText]="'AWBID: ' + itemCard.fWB_Details.AWBID">
+      <div class="card-block">
+        <app-collapseable-slide class="card" cdkDrag [titleText]="'AWBID: ' + itemCard.fWB_Details.AWBID">
+          <app-test-table-card-item-detail [itemCard]="itemCard" />
+          <app-test-table-card-preview *cdkDragPreview [item]="itemCard" />
+        </app-collapseable-slide>
+        <button class="remove-btn" (click)="removeCard(itemCard.fWB_Details.AWBID)"></button>
+      </div>
 
-      </app-collapseable-slide>
       }
     </div>
   </div>

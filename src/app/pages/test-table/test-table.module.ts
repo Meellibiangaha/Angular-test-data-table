@@ -7,7 +7,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TabButtonComponent } from '../../shared/components/tab-button/tab-button.component';
 import { TestTableItemComponent } from './components/test-table-item/test-table-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollableContainerDirective } from '../../shared/directives/scrollable-container.directive';
 import { InputSearchComponent } from '../../shared/components/input-search/input-search.component';
 import { DatapickerComponent } from '../../shared/components/datapicker/datapicker.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -16,7 +15,8 @@ import { TestTableItemExpandedComponent } from './components/test-table-item-exp
 import { TestTableTitleComponent } from './components/test-table-title/test-table-title.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CollapseableSlideComponent } from '../../shared/components/collapseable-block/collapseable-slide.component';
-import { CardItemDetailComponent } from './components/card-item-detail/card-item-detail.component';
+import { CardItemDetailComponent } from './components/test-table-card-item-detail/card-item-detail.component';
+import { TestTableCardPreviewComponent } from './components/test-table-card-preview/test-table-card-preview.component';
 
 const routes: Routes = [
   {
@@ -34,6 +34,7 @@ const routes: Routes = [
     TestTableItemExpandedComponent,
     TestTableTitleComponent,
     CardItemDetailComponent,
+    TestTableCardPreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +43,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatPaginatorModule,
     TabButtonComponent,
-    ScrollableContainerDirective,
     InputSearchComponent,
     CollapseableSlideComponent,
     DatapickerComponent,

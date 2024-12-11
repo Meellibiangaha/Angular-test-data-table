@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, Input, signal } from '@angular/core';
 import { FwbReportModel } from '../../models/fwbReports.model';
 import { SlideToggleAnimation } from '../../../../core/animations/slide-toggle.animation';
+import { destructureObj } from '../../../../core/helpers/destructure-obj';
 
 @Component({
   selector: '[app-test-table-item-expanded]',
@@ -30,11 +31,7 @@ export class TestTableItemExpandedComponent {
   updateProcessState(): void {
     this.slideProccess.set(true);
   }
-
   destructureObj<T>(obj: T): { key: string; value: T }[] {
-    if (!obj) return null;
-    return Object.entries(obj)
-      .filter(([key, value]) => !!value)
-      .map(([key, value]) => ({ key, value }));
+    return destructureObj(obj);
   }
 }

@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 28px;
 }
 .title {
@@ -50,9 +51,9 @@
 }
 
 .card {
-  flex-basis: 33%;
+  flex-basis: 100%;
   &-container {
-    width: 650px;
+    min-width: 650px;
     max-width: 650px;
     height: 550px;
     padding: 12px;
@@ -60,12 +61,53 @@
     border: 3px solid #f6f6f6;
     border-radius: 16px;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      width: 5px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 5px;
+      background-color: #e4e4e4;
+      border-radius: 16px;
+      border: 1px solid #e4e4e4;
+    }
+    &::-webkit-scrollbar:vertical {
+      width: 5px;
+    }
+  }
+
+  &-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &-block{
+    display: flex;
+    flex-direction: row;
   }
 }
 
-.collapseable-slides-wrapper {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.remove-btn {
+  position: absolute;
+  left: 95%;
+  display: block;
+  margin-top: 10px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  outline: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23B7B7B7'%3E%3Cpath d='m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z'/%3E%3C/svg%3E");
+  &:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z'/%3E%3C/svg%3E");
+  }
 }

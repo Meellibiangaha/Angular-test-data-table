@@ -1,0 +1,10 @@
+@for (title of destructureObj(itemCard); track title) {
+  <div class="details">
+    <h1 class="details-title" *ngIf="title.value">{{ title.key }}</h1>
+    @for (detail of destructureObj(title.value); track detail) {
+    <div>
+      <span class="details-option">{{ detail.key }}:</span> {{ detail.value }}
+    </div>
+    }
+  </div>
+  }

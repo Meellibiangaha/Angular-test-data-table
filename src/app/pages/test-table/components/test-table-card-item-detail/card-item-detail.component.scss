@@ -1,0 +1,14 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  &-title {
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 4px;
+    font-size: 18px;
+  }
+  &-option {
+    font-weight: 500;
+  }
+}
