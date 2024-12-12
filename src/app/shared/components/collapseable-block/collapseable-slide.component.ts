@@ -43,7 +43,6 @@ export class CollapseableSlideComponent {
   }
 
   @Output()
-  // eslint-disable-next-line @angular-eslint/no-output-native
   toggleSlide = new EventEmitter<boolean>(false);
 
   readonly title = signal<string>(null);
@@ -65,6 +64,7 @@ export class CollapseableSlideComponent {
     }
   }
 
+  /** Методы ControlValueAccessor */
   writeValue(value: boolean): void {
     this.isChecked.set(value);
   }
@@ -80,6 +80,7 @@ export class CollapseableSlideComponent {
   setDisabledState?(isDisabled: boolean): void {
     this.disabled.set(isDisabled);
   }
+  /** end */
 
   updateOpenedState(): void {
     this.opened.set(this.isChecked());

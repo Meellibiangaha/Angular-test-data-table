@@ -1,9 +1,7 @@
 import { OrderByEnum } from '../enums/order-by.enum';
 
 export type PagedListQueryBase = {
-  /** Номер страницы */
   pageNumber?: number;
-  /** Количество записей на странице */
   pageSize?: number;
 };
 

@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { TestTableService } from './test-table.service';
 import { ActivatedRoute } from '@angular/router';
-import { AppStorageService } from '../../core/services/app-storage.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PAGINATION_CONFIG } from '../../core/constants/pagination-config';
 import { FwbReportsPageResult } from './models/fwbReports-page-result';
@@ -10,11 +9,11 @@ import { PaginatorModel } from '../../core/models/paginator.model';
 import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, combineLatest, debounceTime, map, skip, startWith, switchMap, tap } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DateRange, DateRangeForm } from '../../core/models/date-range';
+import { DateRangeForm } from '../../core/models/date-range';
 import { OrderByEnum } from '../../core/enums/order-by.enum';
 import { FwbTableForm } from './form/fwbReports-table.form';
 import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @UntilDestroy()
 @Component({
@@ -25,11 +24,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }],
 })
 export class TestTableComponent implements OnInit {
-  constructor(
-    private testTableService: TestTableService,
-    private activatedRoute: ActivatedRoute,
-    private storageService: AppStorageService
-  ) {}
+  constructor(private testTableService: TestTableService, private activatedRoute: ActivatedRoute) {}
 
   /** Пагинация */
   readonly paginator = signal<PaginatorModel>({
